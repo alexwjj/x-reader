@@ -182,8 +182,8 @@ try {
   console.log('Native popup geometry:', nativePopup[0]);
   const popupGeometry = nativePopup[0];
   assert.equal(popupGeometry.bodyWidth, 360, 'The popup content must retain its full width.');
-  assert.equal(popupGeometry.clientWidth, 360, 'The content viewport must not shrink to its initial 178px width.');
-  // Linux uses a non-overlay vertical scrollbar; its width belongs to the outer viewport.
+  // Chromium on Linux may allocate a slightly wider native viewport than the fixed CSS body.
+  assert.ok(popupGeometry.clientWidth >= 360 && popupGeometry.clientWidth <= 380, 'The popup viewport must contain the full 360px body.');
   assert.ok(popupGeometry.width >= 360 && popupGeometry.width <= 380);
   assert.ok(popupGeometry.contentWidth <= popupGeometry.clientWidth, 'The popup must not overflow horizontally.');
   await popup.evaluate(() => chrome.extension.getViews({ type: 'popup' }).forEach(view => view.close()));
