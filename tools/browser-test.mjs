@@ -174,11 +174,18 @@ try {
   }));
   const nativePopup = await popup.evaluate(() => chrome.extension.getViews({ type: 'popup' }).map(view => ({
     width: view.innerWidth, height: view.innerHeight, contentWidth: view.document.documentElement.scrollWidth,
+    clientWidth: view.document.documentElement.clientWidth,
+    bodyWidth: view.document.body.getBoundingClientRect().width,
     titleWidth: view.document.querySelector('h1').getBoundingClientRect().width
   })));
   assert.equal(nativePopup.length, 1, 'Open the actual toolbar popup instead of validating only a full browser tab.');
-  assert.equal(nativePopup[0].width, 360, 'The native popup must not shrink to its initial 178px viewport.');
-  assert.ok(nativePopup[0].contentWidth <= 360);
+  console.log('Native popup geometry:', nativePopup[0]);
+  const popupGeometry = nativePopup[0];
+  assert.equal(popupGeometry.bodyWidth, 360, 'The popup content must retain its full width.');
+  assert.equal(popupGeometry.clientWidth, 360, 'The content viewport must not shrink to its initial 178px width.');
+  // Linux uses a non-overlay vertical scrollbar; its width belongs to the outer viewport.
+  assert.ok(popupGeometry.width >= 360 && popupGeometry.width <= 380);
+  assert.ok(popupGeometry.contentWidth <= popupGeometry.clientWidth, 'The popup must not overflow horizontally.');
   await popup.evaluate(() => chrome.extension.getViews({ type: 'popup' }).forEach(view => view.close()));
   await popup.setViewportSize({ width: 360, height: 660 });
   await popup.screenshot({ path: join(screenshots, 'popup.png'), animations: 'disabled' });
