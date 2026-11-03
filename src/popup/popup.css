@@ -1,0 +1,67 @@
+:root {
+  --bg: #fff;
+  --text: #0f1419;
+  --muted: #536471;
+  --line: #eff3f4;
+  --soft: #f7f9f9;
+  --accent: #1d9bf0;
+  --accent-text: #fff;
+  --track: #cfd9de;
+  --card: #fff;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000; --text: #e7e9ea; --muted: #71767b; --line: #2f3336;
+    --soft: #16181c; --accent: #1d9bf0; --accent-text: #fff; --track: #536471; --card: #000;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #000; --text: #e7e9ea; --muted: #71767b; --line: #2f3336;
+  --soft: #16181c; --accent: #1d9bf0; --accent-text: #fff; --track: #536471; --card: #000;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+/* Chrome measures popups from a small initial viewport. Keep the intrinsic width independent of vw. */
+html, body { width: 360px; min-width: 360px; margin: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font: 13px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+header { display: flex; align-items: center; gap: 10px; padding: 19px 22px; }
+header img { width: 32px; height: 32px; flex-shrink: 0; }
+header > div { flex: 1; min-width: 0; }
+h1 { margin: 0; font-size: 18px; font-weight: 650; letter-spacing: -.5px; white-space: nowrap; }
+h1 span { margin-left: 9px; font-size: 11px; font-weight: 400; letter-spacing: 0; color: var(--muted); }
+.version { flex-shrink: 0; font-size: 10px; color: var(--muted); }
+main { padding: 0 22px; }
+.current { padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+.eyebrow { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--accent); }
+.status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+h2 { margin: 8px 0 5px; font-size: 14px; font-weight: 600; line-height: 1.65; overflow-wrap: anywhere; }
+#page-detail { margin: 0; font-size: 11px; line-height: 1.75; color: var(--muted); }
+.page-actions { display: flex; gap: 8px; margin-top: 12px; }
+button, select { font: inherit; cursor: pointer; }
+button { display: flex; align-items: center; justify-content: center; gap: 8px; height: 33px; border: 0; border-radius: 7px; font-size: 12px; white-space: nowrap; }
+button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+button:disabled { opacity: .45; cursor: default; }
+svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.primary { flex: 1; min-width: 0; border-radius: 999px; background: var(--text); color: var(--bg); }
+.section-label { margin: 19px 0 2px; font-size: 11px; color: var(--muted); }
+.setting { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); position: relative; cursor: pointer; }
+.setting > span:first-child { flex: 1; min-width: 0; }
+.setting strong { display: block; font-size: 12px; font-weight: 550; }
+.setting small { display: block; margin-top: 3px; font-size: 11px; color: var(--muted); }
+.setting input { position: absolute; right: 0; width: 32px; height: 20px; margin: 0; opacity: 0; cursor: pointer; }
+.switch { width: 30px; height: 17px; border-radius: 20px; position: relative; flex-shrink: 0; background: var(--track); pointer-events: none; }
+.switch::after { content: ""; position: absolute; left: 3px; top: 3px; width: 11px; height: 11px; border-radius: 50%; background: var(--bg); box-shadow: 0 1px 2px #0001; }
+.setting input:checked + .switch { background: var(--accent); }
+.setting input:checked + .switch::after { left: 16px; background: var(--accent-text); }
+.setting input:focus-visible + .switch { outline: 2px solid var(--accent); outline-offset: 4px; }
+select { width: 98px; padding: 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--soft); color: var(--text); font-size: 11px; }
+.theme-setting { border-bottom: 0; }
+#notice { min-height: 16px; margin: 1px 0 8px; font-size: 11px; color: var(--accent); }
+#notice[data-error="true"] { color: #c34938; }
+footer { display: flex; justify-content: space-between; gap: 8px; padding: 12px 22px; border-top: 1px solid var(--line); font-size: 10px; color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) { .switch, .switch::after { transition: background .15s, left .15s; } }

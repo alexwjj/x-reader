@@ -1,0 +1,33 @@
+{
+  "name": "x-reader",
+  "version": "0.1.4",
+  "private": true,
+  "description": "A quiet table of contents for long reads on X.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexwjj/x-reader.git"
+  },
+  "homepage": "https://github.com/alexwjj/x-reader",
+  "bugs": {
+    "url": "https://github.com/alexwjj/x-reader/issues"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "lint": "node tools/check.mjs",
+    "test": "node --test tests/*.test.js",
+    "test:browser": "node tools/browser-test.mjs",
+    "demo": "node tools/serve.mjs",
+    "icons": "node tools/icons.mjs",
+    "assets:store": "node tools/store-assets.mjs",
+    "check:public": "node tools/check-public.mjs",
+    "zip": "node tools/zip.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0",
+    "playwright": "1.56.1"
+  }
+}

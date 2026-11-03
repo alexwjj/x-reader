@@ -1,0 +1,31 @@
+{
+  "screenshots": [
+    {
+      "file": "screenshot-light-1280x800.png",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "screenshot-dark-1280x800.png",
+      "width": 1280,
+      "height": 800
+    }
+  ],
+  "promotional": [
+    {
+      "file": "readme-hero-1280x640.png",
+      "width": 1280,
+      "height": 640
+    },
+    {
+      "file": "promo-small-440x280.png",
+      "width": 440,
+      "height": 280
+    },
+    {
+      "file": "promo-marquee-1400x560.png",
+      "width": 1400,
+      "height": 560
+    }
+  ]
+}
