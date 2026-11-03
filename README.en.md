@@ -4,7 +4,26 @@
 
 A clickable table of contents for long reads on X. Navigate headings from a floating panel beside the article, with the current section highlighted as you scroll.
 
-[中文](README.md) · [Chrome Web Store publishing](docs/store/README.md) · [Privacy](PRIVACY.md) · [Report an issue](https://github.com/alexwjj/x-reader/issues) · [Changelog](CHANGELOG.md)
+[中文](README.md) · [AI installation](#install-with-an-ai-assistant) · [Privacy](PRIVACY.md) · [Report an issue](https://github.com/alexwjj/x-reader/issues) · [Changelog](CHANGELOG.md)
+
+## Install with an AI assistant
+
+**Local installation is free and requires no store account or registration fee.** Copy the prompt below into an AI assistant that can use your computer's terminal or browser. A chat-only assistant can guide you through the manual steps. The extension itself does not need AI to run.
+
+```text
+Help me install x-reader in Chrome on my computer. It is an open-source extension that automatically creates a table of contents for long articles on X/Twitter.
+
+Repository: https://github.com/alexwjj/x-reader
+
+Read the repository README and manifest.json first, then install it:
+1. If you can use my terminal or filesystem, download the repository into a permanent local directory. Prefer git clone; if Git is unavailable, download and extract the main branch ZIP. Inspect an existing directory before using it and do not overwrite my files or uncommitted changes. If you cannot operate my computer, give me concise instructions for my operating system.
+2. Find the project root containing manifest.json, src/ and icons/, and check that entry files and icons exist. No build is required. Do not run npm install or npm ci, or install Node.js or development dependencies just to install the extension.
+3. Open chrome://extensions and help me enable Developer mode, click Load unpacked, and select the project root. For browser or operating-system steps that require my confirmation, tell me exactly what to click and give me the absolute directory path.
+4. Refresh existing X tabs. Ask me to open a long article with section headings and expand the full text. Check that the outline appears on the right, clicking headings navigates, and Up/Down switches chapters. Short posts without headings do not show an automatic outline.
+5. Tell me where it is installed, which steps you actually completed, and how to update: update the local source, reload the extension in chrome://extensions, then refresh X. Remind me to keep the installation directory because Chrome continues reading its files.
+
+Perform the steps you can directly. Guide me when a manual click or confirmation is required. If you cannot operate or verify the browser, say so instead of claiming installation succeeded. No Chrome Web Store developer registration or registration fee is needed.
+```
 
 ## Preview
 
@@ -29,9 +48,9 @@ Screenshots show the actual extension running on local demonstration content, wi
 
 ## Install
 
-Requires **Chrome 116+**. Node.js and npm are only needed for development. The Chrome Web Store version has not been published yet; load the local source for now. Maintainers can follow the [publishing guide](docs/store/README.md).
+Requires **Chrome 116+**. No Node.js, npm or payment is needed. The project is distributed through this repository. Follow the manual steps below or use the [AI installation prompt](#install-with-an-ai-assistant).
 
-1. Save the project locally, keeping `manifest.json`, `src/` and `icons/` together.
+1. [Download the source ZIP](https://github.com/alexwjj/x-reader/archive/refs/heads/main.zip) and extract it into a permanent directory, or clone this repository. Keep `manifest.json`, `src/` and `icons/` together.
 2. Open `chrome://extensions` and enable **Developer mode**.
 3. Click **Load unpacked** and select the `x-reader/` project root directly. No build is required.
 4. Optionally pin x-reader to the toolbar. **Refresh X tabs that were already open when you installed the extension.**
@@ -65,11 +84,11 @@ The manifest requests only the `storage` permission for local preferences. Conte
 - Home feeds do not receive a combined outline. Full-text fetching, downloads, translation, AI summaries and access-control bypasses are outside the scope.
 - Local fixture tests do not certify compatibility with the live X website.
 
-## Store publishing and promotional assets
+## Promotional assets
 
 ![x-reader small promotional tile](docs/store/promo-small-440x280.png)
 
-The store icon, two 1280×800 screenshots of the actual extension on local demo content, 440×280 small promo tile, 1400×560 marquee and README hero are available in [docs/store/](docs/store/README.md). Copy-ready [Chinese](docs/store/listing.zh-CN.md) and [English](docs/store/listing.en.md) listings are included.
+The project icon, two 1280×800 screenshots of the actual extension on local demo content, 440×280 small promo tile, 1400×560 marquee and README hero are available in [docs/store/](docs/store/) for sharing the project. Assets use common store dimensions; installing the extension still follows the free local installation steps above.
 
 ```bash
 npm run assets:store  # Regenerate images in isolated Chromium

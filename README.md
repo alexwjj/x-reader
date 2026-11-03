@@ -4,7 +4,26 @@
 
 为 X 长文生成可点击的章节目录。保留原页面阅读体验，用右侧浮层快速定位小标题，滚动时同步标记当前章节。
 
-[English](README.en.md) · [发布到 Chrome Web Store](docs/store/README.md) · [隐私说明](PRIVACY.md) · [反馈问题](https://github.com/alexwjj/x-reader/issues) · [更新记录](CHANGELOG.md)
+[English](README.en.md) · [AI 安装](#ai-安装) · [隐私说明](PRIVACY.md) · [反馈问题](https://github.com/alexwjj/x-reader/issues) · [更新记录](CHANGELOG.md)
+
+## AI 安装
+
+**免费本地安装，无需商店账号或注册费。** 复制下面整段提示词，交给支持本机终端或浏览器操作的 AI 助手即可。只能聊天的 AI 也可以根据提示词带你手动安装。扩展运行本身不需要 AI。
+
+```text
+请帮我在本机 Chrome 中安装 x-reader，这是一个为 X/Twitter 长文自动生成章节目录的开源扩展。
+
+仓库：https://github.com/alexwjj/x-reader
+
+请先阅读仓库 README 和 manifest.json，再执行安装：
+1. 有本机终端或文件操作能力时，直接把仓库下载到一个可长期保留的目录。优先使用 git clone；没有 Git 就下载并解压仓库的 main 分支 ZIP。已有同名目录时先检查内容，不要覆盖我的文件或未提交修改。没有本机操作能力时，请给我适合当前系统的简明步骤。
+2. 找到直接包含 manifest.json、src/、icons/ 的项目根目录，检查入口文件和图标是否齐全。这个扩展无需构建，不要为安装运行 npm install、npm ci 或安装 Node.js、开发依赖。
+3. 打开 chrome://extensions，协助我开启“开发者模式”，点击“加载已解压的扩展程序”，选择项目根目录。浏览器或系统要求我手动确认的步骤，请明确告诉我该点哪里，并提供目录的绝对路径。
+4. 安装后刷新已打开的 X 页面，让我打开一篇带章节标题的长文并展开完整正文。确认右侧出现目录，点击标题可跳转，上下方向键可切换章节；没有标题的短帖不会自动出现目录。
+5. 最后告诉我安装目录、实际完成了哪些步骤，以及之后如何更新：更新本地源码，在 chrome://extensions 重新加载扩展，再刷新 X 页面。提醒我保留安装目录，Chrome 仍需要读取其中的文件。
+
+请直接完成你能操作的部分。遇到必须由我点击或确认的步骤再指导我操作；如果无法操作或验证浏览器，请如实说明，不要声称已经安装成功。不需要注册 Chrome Web Store 开发者，也不需要支付商店注册费。
+```
 
 ## 阅读效果
 
@@ -29,9 +48,9 @@
 
 ## 安装
 
-需要 **Chrome 116+**。使用扩展不需要 Node.js 或 npm。商店版尚未发布，目前可以加载本地源码；发布者可按 [上架指南](docs/store/README.md) 提交审核。
+需要 **Chrome 116+**，无需 Node.js、npm 或付费。项目通过本仓库分发，按下面的步骤加载本地源码，也可以直接使用上面的 [AI 安装提示词](#ai-安装)。
 
-1. 将项目文件保存到本地，确保目录内有 `manifest.json`、`src/` 和 `icons/`。
+1. [下载源码 ZIP](https://github.com/alexwjj/x-reader/archive/refs/heads/main.zip) 并解压到长期保留的目录，或克隆本仓库；确保目录内有 `manifest.json`、`src/` 和 `icons/`。
 2. 打开 `chrome://extensions`，开启右上角的“开发者模式”。
 3. 点击“加载已解压的扩展程序”，直接选择项目根目录 `x-reader/`，无需构建。
 4. 可将 x-reader 固定到工具栏。**安装后刷新此前已打开的 X 页面**，让内容脚本生效。
@@ -65,11 +84,11 @@
 - 不为首页信息流生成混合目录，不提供全文抓取、下载、翻译、AI 摘要或访问限制绕过。
 - 本地浏览器测试使用受控 fixture，不能作为真实线上 X 的兼容认证。
 
-## 商店发布与宣传素材
+## 宣传素材
 
 ![x-reader 商店小推广图](docs/store/promo-small-440x280.png)
 
-已准备好商店图标、两张 1280×800 实际扩展演示截图、440×280 小推广图、1400×560 横幅和 README 头图，均保存在 [docs/store/](docs/store/README.md)。[中文商店文案](docs/store/listing.zh-CN.md) 与 [英文商店文案](docs/store/listing.en.md) 可直接作为填写起点。
+项目图标、两张 1280×800 实际扩展演示截图、440×280 小推广图、1400×560 横幅和 README 头图均保存在 [docs/store/](docs/store/)，可用于介绍或分享项目。素材按商店通用尺寸准备，使用扩展仍按上方的免费本地安装方式进行。
 
 ```bash
 npm run assets:store  # 使用隔离 Chromium 重新生成图片
