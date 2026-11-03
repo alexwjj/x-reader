@@ -161,7 +161,8 @@ try {
   await manager.close();
   const popup = await context.newPage();
   popup.on('pageerror', error => errors.push(error.message));
-  await popup.setViewportSize({ width: 360, height: 660 });
+  // Linux clamps native popups to the host window; measure in a full desktop window.
+  await popup.setViewportSize({ width: 1440, height: 1000 });
   await page.bringToFront();
   await popup.goto(`chrome-extension://${id}/src/popup/popup.html`);
   await popup.waitForFunction(() => document.querySelector('#status-label').textContent === '当前长文' && !document.querySelector('#toggle').disabled);
@@ -179,6 +180,7 @@ try {
   assert.equal(nativePopup[0].width, 360, 'The native popup must not shrink to its initial 178px viewport.');
   assert.ok(nativePopup[0].contentWidth <= 360);
   await popup.evaluate(() => chrome.extension.getViews({ type: 'popup' }).forEach(view => view.close()));
+  await popup.setViewportSize({ width: 360, height: 660 });
   await popup.screenshot({ path: join(screenshots, 'popup.png'), animations: 'disabled' });
   await popup.locator('[name="enabled"]').uncheck();
   await page.waitForFunction(() => !document.querySelector('[data-x-reader-host]'));
