@@ -1,4 +1,5 @@
 import { createHubAnalytics } from '../shared/hub-sdk.js';
+async function initialize() {
 const origin = 'https://alexwjj-hub.weightbook.icu';
 const toggle = document.getElementById('hub-analytics');
 let analytics;
@@ -17,3 +18,6 @@ toggle.addEventListener('change', async () => {
     await chrome.permissions.remove({ origins: [origin + '/*'] });
   }
 });
+
+}
+void initialize().catch(() => { document.getElementById('hub-analytics').disabled = true; });
