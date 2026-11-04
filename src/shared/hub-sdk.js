@@ -51,9 +51,9 @@ export function createHubAnalytics({ projectId, endpoint, respectDNT = true, tra
   pageview()
   return {
     track(name) { if (/^[a-zA-Z\d_.-]{1,64}$/.test(name || '')) { enqueue('event', name); flush() } },
-    stop() {
+    stop({ flush: reportFinal = true } = {}) {
       if (stopped) return
-      finalMetrics(); stopped = true; clearInterval(timer); observers.forEach(o => o.disconnect())
+      if (reportFinal) finalMetrics(); else queue = []; stopped = true; clearInterval(timer); observers.forEach(o => o.disconnect())
       window.removeEventListener('popstate', pageview); window.removeEventListener('hashchange', pageview)
       window.removeEventListener('error', error); window.removeEventListener('unhandledrejection', error)
       window.removeEventListener('pagehide', finalMetrics); document.removeEventListener('visibilitychange', visibility); window.removeEventListener('load', onLoad)

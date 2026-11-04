@@ -2,14 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { runInNewContext } from 'node:vm';
-test('optional analytics requests no permission or network at startup', async()=>{
- const source=(await readFile(new URL('../src/popup/analytics.js',import.meta.url),'utf8')).replace(/^import[^\n]+\n/,'');
- let listener,requests=0,started=0,stopped=0,removed=0;
- const toggle={checked:false,addEventListener:(name,fn)=>listener=fn};
- const chrome={storage:{local:{get:async()=>({}),set:async()=>{}}},permissions:{contains:async()=>false,request:async()=>{requests++;return true;},remove:async()=>{removed++;}}};
- runInNewContext(source,{document:{getElementById:()=>toggle},chrome,createHubAnalytics:()=>{started++;return{stop:()=>stopped++};}});
- await new Promise(setImmediate);
- assert.equal(started,0);assert.equal(requests,0);
- toggle.checked=true;await listener();assert.equal(requests,1);assert.equal(started,1);
- toggle.checked=false;await listener();assert.equal(stopped,1);assert.equal(removed,1);
-});
+const source=(await readFile(new URL('../src/popup/analytics.js',import.meta.url),'utf8')).replace(/^import[^\n]+\n/,'');
+async function setup(saved){
+ let listener,started=0,stopped=0;
+ const toggle={checked:false,addEventListener:(_,fn)=>listener=fn};
+ runInNewContext(source,{document:{getElementById:()=>toggle},chrome:{storage:{local:{get:async()=>saved,set:async()=>{}}}},createHubAnalytics:options=>{assert.equal(options.projectId,'x-reader');started++;return{stop:options=>{assert.equal(options.flush,false);stopped++;}};}});
+ await new Promise(setImmediate);return{toggle,change:()=>listener(),counts:()=>({started,stopped})};
+}
+test('analytics starts by default, can be disabled without a final send',async()=>{const s=await setup({});assert.equal(s.counts().started,1);s.toggle.checked=false;await s.change();assert.equal(s.counts().stopped,1);});
+test('explicit opt-out persists across popup opens',async()=>{const s=await setup({hubAnalyticsEnabled:false});assert.equal(s.counts().started,0);assert.equal(s.toggle.checked,false);});

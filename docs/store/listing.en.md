@@ -22,7 +22,7 @@ Features:
 - Use the right sidebar for the outline, and drag either the expanded panel or its collapsed icon to reposition it.
 - Follow the page theme, or choose light or dark colors.
 - Update the outline automatically when article content changes.
-- Process article content locally in the current page. Preferences stay in the current browser. No article uploads. Anonymous popup analytics is off by default and requires explicit opt-in.
+- Process article content locally in the current page. Preferences stay in the current browser. No article uploads. Anonymous popup analytics is on by default and can be disabled in the popup.
 
 Getting started:
 

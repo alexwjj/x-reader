@@ -20,7 +20,7 @@ const pkg = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
 assert.equal(manifest.manifest_version, 3);
 assert.equal(manifest.version, pkg.version, 'Keep manifest.json and package.json versions in sync.');
 assert.deepEqual(manifest.permissions, ['storage']);
-assert.equal(manifest.host_permissions, undefined, 'Content script matches are sufficient.');
+assert.deepEqual(manifest.host_permissions, ['https://alexwjj-hub.weightbook.icu/*'], 'Only the fixed anonymous analytics receiver is allowed.');
 for (const script of manifest.content_scripts) {
   for (const name of [...script.js, ...(script.css || [])]) await access(join(root, name));
   assert.ok(script.matches.every(pattern => /^https:\/\/(?:www\.)?(?:x|twitter)\.com\/\*$/.test(pattern)));

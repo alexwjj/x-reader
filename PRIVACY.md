@@ -1,12 +1,12 @@
 # 隐私说明 / Privacy
 
-适用于 x-reader 0.1.5，更新日期：2026-11-04。
+适用于 x-reader 0.1.6，更新日期：2026-11-04。
 
 ## 本地处理
 
 x-reader 在受支持的 X/Twitter 页面中读取已加载的正文 DOM，提取文章标题和章节标题，生成可点击目录。正文、标题、DOM 引用、当前章节及面板展开状态只用于页面内存中的导航，不保存为文章档案或阅读历史。
 
-扩展无后台工作线程和远程 AI 服务。默认关闭匿名统计；开启后的统计范围、接收端与关闭方式见下方「可选匿名统计」。不上传正文、目录或正在阅读的网址，不读取登录凭证，也不要求配置账号或密钥。不调用 X 私有接口，不主动获取未加载正文，不绕过登录、付费或其他内容访问限制。
+扩展无后台工作线程和远程 AI 服务。默认启用可关闭的匿名统计；开启后的统计范围、接收端与关闭方式见下方「可选匿名统计」。不上传正文、目录或正在阅读的网址，不读取登录凭证，也不要求配置账号或密钥。不调用 X 私有接口，不主动获取未加载正文，不绕过登录、付费或其他内容访问限制。
 
 ## 本地访问的数据类别
 
@@ -49,11 +49,14 @@ Locally accessed website content includes the current article's title, body and 
 
 Only four preferences persist under `settings` in `chrome.storage.local`: `enabled`, `detectBold`, `detectNumbered` (all default to `true`), and `theme` (defaults to `auto`). The extension does not sync them across devices. Disabling the feature keeps preferences; uninstalling removes its local storage.
 
-The extension requests only `storage`. Its content scripts match HTTPS X/Twitter domains, including their `www` variants. The popup exchanges local status and navigation commands with the active tab. There is no background worker or remote AI service. Analytics is off by default; users may explicitly enable anonymous popup-only analytics and grant optional Hub host permission. Article content, article URLs and credentials are never uploaded. It does not read credentials, require account or API-key configuration, call private X APIs, fetch unloaded text or bypass access restrictions.
+The extension requests only `storage`. Its content scripts match HTTPS X/Twitter domains, including their `www` variants. The popup exchanges local status and navigation commands with the active tab. There is no background worker or remote AI service. Anonymous popup-only analytics is enabled by default, can be disabled, and uses a fixed Hub host permission. Article content, article URLs and credentials are never uploaded. It does not read credentials, require account or API-key configuration, call private X APIs, fetch unloaded text or bypass access restrictions.
 
 X's own network activity and data practices are separate. Installing development dependencies or Playwright browsers contacts their software distribution services; these are not extension runtime services.
 
 
 ## 可选匿名统计
 
-默认关闭。用户开启后，扩展会请求个人 Hub 域名的可选访问权限，使用随扩展打包的 SDK 统计扩展弹窗访问、前台停留和错误计数。仅发送扩展自身路径、随机匿名标识与性能数值，不采集 X 文章、标题、内容、当前标签页网址或账号。统计发送至 https://alexwjj-hub.weightbook.icu 的独立数据库，遵守 DNT/GPC；可在弹窗中关闭并撤销权限。没有远程执行代码。
+默认启用，可在弹窗中关闭。扩展仅请求个人 Hub 接收域名的访问权限，使用随扩展打包的 SDK 统计扩展弹窗访问、前台停留和错误计数。仅发送扩展自身路径、随机匿名标识与性能数值，不采集 X 文章、标题、内容、当前标签页网址或账号。统计发送至 https://alexwjj-hub.weightbook.icu 的独立数据库，遵守 DNT/GPC；可在弹窗中关闭并撤销权限。没有远程执行代码。
+
+
+匿名统计开关 `hubAnalyticsEnabled` 保存在 chrome.storage.local；匿名访客与会话随机标识保存在扩展自身存储。仅记录弹窗页面访问、前台停留和错误计数，遵守 DNT/GPC。关闭后停止发送，不上传 X 页面内容、标题、网址或账号。

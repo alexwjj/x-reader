@@ -1,23 +1,15 @@
 import { createHubAnalytics } from '../shared/hub-sdk.js';
 async function initialize() {
-const origin = 'https://alexwjj-hub.weightbook.icu';
-const toggle = document.getElementById('hub-analytics');
-let analytics;
-const start = () => { analytics = createHubAnalytics({ projectId: 'x-reader', endpoint: origin + '/api/collect' }); };
-const saved = await chrome.storage.local.get('hubAnalyticsEnabled');
-if (saved.hubAnalyticsEnabled && await chrome.permissions.contains({ origins: [origin + '/*'] })) { toggle.checked = true; start(); }
-toggle.addEventListener('change', async () => {
-  if (toggle.checked) {
-    const granted = await chrome.permissions.request({ origins: [origin + '/*'] });
-    toggle.checked = granted;
-    await chrome.storage.local.set({ hubAnalyticsEnabled: granted });
-    if (granted) start();
-  } else {
-    analytics?.stop(); analytics = undefined;
-    await chrome.storage.local.set({ hubAnalyticsEnabled: false });
-    await chrome.permissions.remove({ origins: [origin + '/*'] });
-  }
-});
-
+  const toggle = document.getElementById('hub-analytics');
+  let analytics;
+  const start = () => { analytics = createHubAnalytics({ projectId: 'x-reader', endpoint: 'https://alexwjj-hub.weightbook.icu/api/collect' }); };
+  const saved = await chrome.storage.local.get('hubAnalyticsEnabled');
+  toggle.checked = saved.hubAnalyticsEnabled !== false;
+  if (toggle.checked) start();
+  toggle.addEventListener('change', async () => {
+    await chrome.storage.local.set({ hubAnalyticsEnabled: toggle.checked });
+    if (toggle.checked) start();
+    else { analytics?.stop({ flush: false }); analytics = undefined; }
+  });
 }
 void initialize().catch(() => { document.getElementById('hub-analytics').disabled = true; });
