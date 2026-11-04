@@ -1,6 +1,6 @@
 # 隐私说明 / Privacy
 
-适用于 x-reader 0.1.4，更新日期：2026-11-04。
+适用于 x-reader 0.1.5，更新日期：2026-11-04。
 
 ## 本地处理
 
@@ -49,7 +49,7 @@ Locally accessed website content includes the current article's title, body and 
 
 Only four preferences persist under `settings` in `chrome.storage.local`: `enabled`, `detectBold`, `detectNumbered` (all default to `true`), and `theme` (defaults to `auto`). The extension does not sync them across devices. Disabling the feature keeps preferences; uninstalling removes its local storage.
 
-The extension requests only `storage`. Its content scripts match HTTPS X/Twitter domains, including their `www` variants. The popup exchanges local status and navigation commands with the active tab. There is no background worker, remote API, AI service, analytics or upload of article content, URLs or usage data. It does not read credentials, require account or API-key configuration, call private X APIs, fetch unloaded text or bypass access restrictions.
+The extension requests only `storage`. Its content scripts match HTTPS X/Twitter domains, including their `www` variants. The popup exchanges local status and navigation commands with the active tab. There is no background worker or remote AI service. Analytics is off by default; users may explicitly enable anonymous popup-only analytics and grant optional Hub host permission. Article content, article URLs and credentials are never uploaded. It does not read credentials, require account or API-key configuration, call private X APIs, fetch unloaded text or bypass access restrictions.
 
 X's own network activity and data practices are separate. Installing development dependencies or Playwright browsers contacts their software distribution services; these are not extension runtime services.
 

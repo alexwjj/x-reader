@@ -1,6 +1,6 @@
 {
   "name": "x-reader",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "description": "A quiet table of contents for long reads on X.",
   "type": "module",

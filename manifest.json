@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "x-reader",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "为 X 长文生成可点击的章节目录，让长文章更好读。",
   "minimum_chrome_version": "116",
   "homepage_url": "https://github.com/alexwjj/x-reader",

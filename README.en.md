@@ -74,7 +74,7 @@ Semantic headings (`h1`–`h6` and `role="heading"`) remain enabled regardless o
 
 ## Privacy and permissions
 
-The manifest requests only the `storage` permission for local preferences. Content scripts are limited to X/Twitter domains. Article text and outlines are processed in the current page's memory, without being saved or uploaded. The extension does not read login credentials, collect analytics or call private X APIs. It requires no X account configuration; access to page content remains subject to X's own requirements. See [PRIVACY.md](PRIVACY.md).
+The manifest requests only the `storage` permission for local preferences. Content scripts are limited to X/Twitter domains. Article text and outlines are processed in the current page's memory, without being saved or uploaded. The extension does not read login credentials, collect analytics by default or call private X APIs. Optional anonymous popup analytics requires explicit opt-in and optional Hub host permission. It requires no X account configuration; access to page content remains subject to X's own requirements. See [PRIVACY.md](PRIVACY.md).
 
 ## Limits and troubleshooting
 
