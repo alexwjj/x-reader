@@ -1,3 +1,4 @@
+import './analytics.js';
 import { createSettingsStore } from '../shared/settings.js';
 
 const store = createSettingsStore();

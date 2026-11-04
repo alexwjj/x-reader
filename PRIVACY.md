@@ -52,3 +52,8 @@ Only four preferences persist under `settings` in `chrome.storage.local`: `enabl
 The extension requests only `storage`. Its content scripts match HTTPS X/Twitter domains, including their `www` variants. The popup exchanges local status and navigation commands with the active tab. There is no background worker, remote API, AI service, analytics or upload of article content, URLs or usage data. It does not read credentials, require account or API-key configuration, call private X APIs, fetch unloaded text or bypass access restrictions.
 
 X's own network activity and data practices are separate. Installing development dependencies or Playwright browsers contacts their software distribution services; these are not extension runtime services.
+
+
+## 可选匿名统计
+
+默认关闭。用户开启后，扩展会请求个人 Hub 域名的可选访问权限，使用随扩展打包的 SDK 统计扩展弹窗访问、前台停留和错误计数。仅发送扩展自身路径、随机匿名标识与性能数值，不采集 X 文章、标题、内容、当前标签页网址或账号。统计发送至 https://alexwjj-hub.weightbook.icu 的独立数据库，遵守 DNT/GPC；可在弹窗中关闭并撤销权限。没有远程执行代码。
